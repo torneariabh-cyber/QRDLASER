@@ -1,66 +1,152 @@
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalize seu Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>D Laser Premium - Personalize seu Ticket</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container client-container">
-        <div class="card">
-            <h1>🎨 Personalize seu Ticket</h1>
-            <p class="subtitle">Escaneie o QR Code e crie seu design</p>
-            
-            <form id="customizationForm">
-                <div class="form-group">
-                    <label for="name">Seu Nome</label>
-                    <input type="text" id="name" placeholder="Digite seu nome" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="font">Escolha a Fonte</label>
-                    <select id="font">
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Impact">Impact</option>
-                        <option value="Comic Sans MS">Comic Sans MS</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="icon">Ícone (opcional)</label>
-                    <select id="icon">
-                        <option value="">Nenhum</option>
-                        <option value="⭐">⭐ Estrela</option>
-                        <option value="❤️">❤️ Coração</option>
-                        <option value="🎯">🎯 Alvo</option>
-                        <option value="🔥">🔥 Fogo</option>
-                        <option value="🌟">🌟 Brilhante</option>
-                        <option value="🎨">🎨 Arte</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-primary">Enviar para Gravação</button>
-            </form>
-
-            <div id="ticketResult" style="display: none;">
-                <div class="success-message">
-                    <h2>✅ Ticket Criado!</h2>
-                    <p>Seu ticket foi enviado para o operador.</p>
-                </div>
-                <div class="qr-code-container">
-                    <h3>QR Code do Ticket</h3>
-                    <img id="qrCodeImage" alt="QR Code do Ticket">
-                    <p class="ticket-id">ID: <span id="ticketId"></span></p>
-                    <p class="status" id="ticketStatus">Aguardando processamento...</p>
+    <div class="premium-container">
+        <!-- Header com Logo -->
+        <header class="premium-header">
+            <div class="logo-container">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">
+                    <span class="logo-d">D</span>
+                    <span class="logo-laser">LASER</span>
+                    <span class="logo-premium">PREMIUM</span>
                 </div>
             </div>
+            <div class="header-subtitle">Personalização de Alta Precisão</div>
+        </header>
 
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
-        </div>
+        <!-- Conteúdo Principal -->
+        <main class="premium-main">
+            <div class="card premium-card">
+                <div class="card-header">
+                    <h1>🎨 Crie seu Design</h1>
+                    <p class="card-subtitle">Escaneie o QR Code e personalize seu item com estilo</p>
+                </div>
+
+                <!-- Formulário -->
+                <form id="customizationForm" class="premium-form">
+                    <!-- Nome -->
+                    <div class="form-group premium-group">
+                        <label for="name">
+                            <span class="label-icon">✏️</span>
+                            Seu Nome
+                        </label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            placeholder="Digite seu nome aqui..." 
+                            required
+                            autocomplete="off"
+                            maxlength="30"
+                        >
+                        <div class="input-hint">Máximo 30 caracteres</div>
+                    </div>
+
+                    <!-- Fontes - Aba Expansível -->
+                    <div class="form-group premium-group">
+                        <label>
+                            <span class="label-icon">🔤</span>
+                            Escolha a Fonte
+                        </label>
+                        <div class="font-selector-wrapper">
+                            <button type="button" class="font-toggle-btn" id="fontToggleBtn">
+                                <span id="selectedFontDisplay">Arial</span>
+                                <span class="toggle-arrow">▼</span>
+                            </button>
+                            <div class="font-dropdown" id="fontDropdown">
+                                <div class="font-search">
+                                    <input type="text" id="fontSearch" placeholder="🔍 Buscar fonte...">
+                                </div>
+                                <div class="font-grid" id="fontGrid">
+                                    <!-- Fontes serão inseridas via JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ícone -->
+                    <div class="form-group premium-group">
+                        <label>
+                            <span class="label-icon">🎯</span>
+                            Escolha um Ícone
+                        </label>
+                        <div class="icon-grid" id="iconGrid">
+                            <button type="button" class="icon-option selected" data-icon="">
+                                <span>Nenhum</span>
+                            </button>
+                            <button type="button" class="icon-option" data-icon="⭐">⭐</button>
+                            <button type="button" class="icon-option" data-icon="❤️">❤️</button>
+                            <button type="button" class="icon-option" data-icon="🔥">🔥</button>
+                            <button type="button" class="icon-option" data-icon="🌟">🌟</button>
+                            <button type="button" class="icon-option" data-icon="🎨">🎨</button>
+                            <button type="button" class="icon-option" data-icon="💎">💎</button>
+                            <button type="button" class="icon-option" data-icon="🚀">🚀</button>
+                            <button type="button" class="icon-option" data-icon="🏆">🏆</button>
+                            <button type="button" class="icon-option" data-icon="👑">👑</button>
+                            <button type="button" class="icon-option" data-icon="🎯">🎯</button>
+                            <button type="button" class="icon-option" data-icon="⚡">⚡</button>
+                        </div>
+                    </div>
+
+                    <!-- Preview ao Vivo -->
+                    <div class="live-preview">
+                        <h4>👀 Prévia</h4>
+                        <div class="preview-box" id="previewBox">
+                            <span id="previewText">Seu Nome</span>
+                        </div>
+                    </div>
+
+                    <!-- Botão Enviar -->
+                    <button type="submit" class="btn-premium">
+                        <span class="btn-content">
+                            <span class="btn-icon">🚀</span>
+                            <span class="btn-text">Enviar para Gravação</span>
+                        </span>
+                        <span class="btn-pulse"></span>
+                    </button>
+                </form>
+
+                <!-- Resultado -->
+                <div id="ticketResult" class="ticket-result" style="display: none;">
+                    <div class="result-card">
+                        <div class="result-icon">✅</div>
+                        <h2>Ticket Criado!</h2>
+                        <p>Seu design foi enviado para o operador</p>
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <img id="qrCodeImage" alt="QR Code do Ticket">
+                            </div>
+                            <div class="ticket-info">
+                                <p class="ticket-id-label">ID do Ticket</p>
+                                <p class="ticket-id-value" id="ticketId">---</p>
+                            </div>
+                        </div>
+                        <div class="status-container">
+                            <div class="status-indicator" id="ticketStatus">
+                                <span class="status-dot pending"></span>
+                                Aguardando processamento...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensagens -->
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div id="successMessage" class="success-message" style="display: none;"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="premium-footer">
+            <p>© 2026 D Laser Premium - Todos os direitos reservados</p>
+            <p class="footer-tech">Tecnologia de ponta para personalização a laser</p>
+        </footer>
     </div>
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
