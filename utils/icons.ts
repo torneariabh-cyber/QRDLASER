@@ -1,4 +1,7 @@
-import { Icon } from '../types';
+export interface Icon {
+  symbol: string;
+  name: string;
+}
 
 export const ICONS: Icon[] = [
   { symbol: '⭐', name: 'Estrela' },
@@ -13,8 +16,4 @@ export const ICONS: Icon[] = [
   { symbol: '🎯', name: 'Alvo' },
   { symbol: '⚡', name: 'Raio' },
   { symbol: '🎵', name: 'Música' },
-  { symbol: '🌈', name: 'Arco-íris' },
-  { symbol: '🌺', name: 'Flor' },
-  { symbol: '🦋', name: 'Borboleta' },
-  { symbol: '🌊', name: 'Onda' },
 ];
