@@ -1,4 +1,8 @@
-import { Font } from '../types';
+export interface Font {
+  name: string;
+  sample: string;
+  category: string;
+}
 
 export const FONTS: Font[] = [
   // Sans-serif
@@ -29,7 +33,7 @@ export const FONTS: Font[] = [
   { name: 'Cormorant Garamond', sample: 'Cormorant', category: 'Serif' },
   { name: 'Abril Fatface', sample: 'Abril', category: 'Serif' },
   
-  // Display/Decorative
+  // Display
   { name: 'Impact', sample: 'Impact', category: 'Display' },
   { name: 'Comic Sans MS', sample: 'Comic Sans', category: 'Display' },
   { name: 'Pacifico', sample: 'Pacifico', category: 'Display' },
@@ -45,7 +49,7 @@ export const FONTS: Font[] = [
   { name: 'Orbitron', sample: 'Orbitron', category: 'Display' },
   { name: 'Exo 2', sample: 'Exo 2', category: 'Display' },
   
-  // Script/Cursive
+  // Script
   { name: 'Dancing Script', sample: 'Dancing Script', category: 'Script' },
   { name: 'Great Vibes', sample: 'Great Vibes', category: 'Script' },
   { name: 'Satisfy', sample: 'Satisfy', category: 'Script' },
@@ -53,16 +57,3 @@ export const FONTS: Font[] = [
   { name: 'Alex Brush', sample: 'Alex Brush', category: 'Script' },
   { name: 'Cedarville Cursive', sample: 'Cedarville', category: 'Script' },
 ];
-
-export const getFontCategories = () => {
-  const categories = new Set(FONTS.map(f => f.category));
-  return Array.from(categories);
-};
-
-export const getFontsByCategory = (category: string) => {
-  return FONTS.filter(f => f.category === category);
-};
-
-export const getFontByName = (name: string) => {
-  return FONTS.find(f => f.name === name) || FONTS[0];
-};
