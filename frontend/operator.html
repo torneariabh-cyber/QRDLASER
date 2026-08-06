@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Operador - QR Customizer</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container operator-container">
+        <div class="card">
+            <h1>🔧 Painel do Operador</h1>
+            <p class="subtitle">Gerencie os tickets de personalização</p>
 
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total de Tickets</span>
+                    <span class="stat-value" id="totalTickets">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Pendentes</span>
+                    <span class="stat-value" id="pendingTickets">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Processados</span>
+                    <span class="stat-value" id="processedTickets">0</span>
+                </div>
+            </div>
+
+            <div class="scan-section">
+                <h3>📷 Escanear QR Code do Ticket</h3>
+                <div class="scan-input-group">
+                    <input type="text" id="scanInput" placeholder="Cole o ID do ticket ou use QR Scanner">
+                    <button id="scanButton" class="btn-secondary">Processar Ticket</button>
+                </div>
+                <div class="qr-scanner-container">
+                    <video id="qrScanner" autoplay playsinline></video>
+                    <button id="startScanner" class="btn-secondary">📷 Iniciar Scanner</button>
+                    <button id="stopScanner" class="btn-secondary" style="display:none;">⏹ Parar Scanner</button>
+                </div>
+            </div>
+
+            <div class="tickets-list">
+                <h3>Tickets Recentes</h3>
+                <div id="ticketsList" class="tickets-grid">
+                    <p class="no-tickets">Nenhum ticket disponível</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
+    <script src="js/operator.js"></script>
+</body>
+</html>
