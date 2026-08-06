@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = '/api';
+// Usar a URL completa para o backend
+const API_URL = 'http://localhost:3001/api';
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -11,24 +12,27 @@ const apiClient = axios.create({
 });
 
 export const api = {
-  // Criar ticket
   createTicket: async (data: { name: string; font: string; icon: string }) => {
     try {
-      console.log('Enviando para API:', data);
+      console.log('📤 Enviando para API:', data);
+      console.log('📍 URL:', `${API_URL}/client/create-ticket`);
+      
       const response = await apiClient.post('/client/create-ticket', data);
-      console.log('Resposta da API:', response.data);
+      console.log('📥 Resposta:', response.data);
       return response.data;
     } catch (error: any) {
-      console.error('Erro na API:', error);
-      // Se o backend não estiver rodando, simular resposta
-      if (error.code === 'ERR_NETWORK') {
-        console.warn('Backend não encontrado, simulando resposta...');
+      console.error('❌ Erro na API:', error);
+      
+      // Se o backend não responder, simular
+      if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')) {
+        console.warn('⚠️ Backend offline, simulando resposta...');
+        const ticketId = 'SIM-' + Math.random().toString(36).substr(2, 8).toUpperCase();
         return {
           success: true,
-          ticketId: 'SIM-' + Math.random().toString(36).substr(2, 8).toUpperCase(),
+          ticketId: ticketId,
           qrCode: `/qr-codes/sim-${Date.now()}.png`,
           ticket: {
-            id: 'SIM-' + Math.random().toString(36).substr(2, 8).toUpperCase(),
+            id: ticketId,
             name: data.name,
             font: data.font,
             icon: data.icon,
@@ -42,7 +46,6 @@ export const api = {
     }
   },
 
-  // Buscar ticket
   getTicket: async (id: string) => {
     try {
       const response = await apiClient.get(`/client/ticket/${id}`);
@@ -53,7 +56,6 @@ export const api = {
     }
   },
 
-  // Processar ticket
   processTicket: async (id: string) => {
     try {
       const response = await apiClient.post(`/operator/process-ticket/${id}`);
