@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalize seu Ticket</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container client-container">
+        <div class="card">
+            <h1>🎨 Personalize seu Ticket</h1>
+            <p class="subtitle">Escaneie o QR Code e crie seu design</p>
+            
+            <form id="customizationForm">
+                <div class="form-group">
+                    <label for="name">Seu Nome</label>
+                    <input type="text" id="name" placeholder="Digite seu nome" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="font">Escolha a Fonte</label>
+                    <select id="font">
+                        <option value="Arial">Arial</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="icon">Ícone (opcional)</label>
+                    <select id="icon">
+                        <option value="">Nenhum</option>
+                        <option value="⭐">⭐ Estrela</option>
+                        <option value="❤️">❤️ Coração</option>
+                        <option value="🎯">🎯 Alvo</option>
+                        <option value="🔥">🔥 Fogo</option>
+                        <option value="🌟">🌟 Brilhante</option>
+                        <option value="🎨">🎨 Arte</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Enviar para Gravação</button>
+            </form>
+
+            <div id="ticketResult" style="display: none;">
+                <div class="success-message">
+                    <h2>✅ Ticket Criado!</h2>
+                    <p>Seu ticket foi enviado para o operador.</p>
+                </div>
+                <div class="qr-code-container">
+                    <h3>QR Code do Ticket</h3>
+                    <img id="qrCodeImage" alt="QR Code do Ticket">
+                    <p class="ticket-id">ID: <span id="ticketId"></span></p>
+                    <p class="status" id="ticketStatus">Aguardando processamento...</p>
+                </div>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/client.js"></script>
+</body>
+</html>
