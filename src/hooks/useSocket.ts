@@ -1,37 +1,39 @@
-import { useEffect, useState } from 'react'
-import { io, Socket } from 'socket.io-client'
-
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || window.location.origin
+import { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
 export const useSocket = () => {
-  const [socket, setSocket] = useState<Socket | null>(null)
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socketInstance = io(SOCKET_URL, {
-      transports: ['websocket'],
+    // Tenta conectar ao backend
+    const socketInstance = io('http://localhost:3001', {
+      transports: ['websocket', 'polling'],
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
-    })
+    });
 
     socketInstance.on('connect', () => {
-      console.log('Socket connected')
-    })
-
-    socketInstance.on('disconnect', () => {
-      console.log('Socket disconnected')
-    })
+      console.log('✅ Socket conectado!');
+      setIsConnected(true);
+      setSocket(socketInstance);
+    });
 
     socketInstance.on('connect_error', (error) => {
-      console.error('Socket connection error:', error)
-    })
+      console.warn('⚠️ Erro na conexão Socket:', error);
+      setIsConnected(false);
+    });
 
-    setSocket(socketInstance)
+    socketInstance.on('disconnect', () => {
+      console.log('❌ Socket desconectado');
+      setIsConnected(false);
+    });
 
     return () => {
-      socketInstance.disconnect()
-    }
-  }, [])
+      socketInstance.disconnect();
+    };
+  }, []);
 
-  return socket
-}
+  return socket;
+};
